@@ -1,7 +1,7 @@
 import "../src/App.css";
 import React, { useState } from "react";
 import axios from "axios";
-import Navbar from "./components/Navbar";
+import ResponsiveAppBar from "./components/Navbar";
 
 const App = () => {
   const [symptoms, setSymptoms] = useState("");
@@ -36,7 +36,7 @@ const App = () => {
 
   return (
     <>
-      <Navbar />
+      <ResponsiveAppBar />
       <div className="symptom-div">
         <h1>Symptom Checker</h1>
         <form onSubmit={handleSubmit}>
