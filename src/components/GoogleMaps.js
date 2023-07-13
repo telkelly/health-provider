@@ -1,50 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import GoogleMapReact from 'google-map-react';
 
-const GoogleMap = () => {
-  const [hospital, setHospital] = useState(null);
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `https://maps.googleapis.com/maps/api/place/details/json?place_id=PLACE_ID&fields=name,geometry&key=YOUR_API_KEY`
-        );
-        setHospital(response.data.result);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchData();
-  }, []);
-    
-    
+export default function GoogleMap() {
+  const defaultProps = {
+    center: {
+      lat: 59.955413,
+      lng: 30.337844,
+    },
+    zoom: 11,
+  };
 
   return (
-    <div style={{ height: '400px', width: '100%' }}>
+    <div style={{ height: "100vh", width: "100%" }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: 'AIzaSyCjRBEiBB5qHoY10iZoJ8KA4UH9fvH8V-0' }}
-        defaultCenter={hospital ? { lat: hospital.geometry.location.lat, lng: hospital.geometry.location.lng } : { lat: 0, lng: 0 }}
-        defaultZoom={13}
+        bootstrapURLKeys={{ key: "AIzaSyBhscz8tAMglgQrbpg64xyOF4u2z40SfFI" }}
+        defaultCenter={defaultProps.center}
+        defaultZoom={defaultProps.zoom}
       >
-        {hospital && (
-          <div
-            lat={hospital.geometry.location.lat}
-            lng={hospital.geometry.location.lng}
-            style={{
-              height: '10px',
-              width: '10px',
-              backgroundColor: 'red',
-              borderRadius: '50%',
-            }}
-          />
-        )}
+        <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" />
       </GoogleMapReact>
     </div>
   );
-};
-
-export default GoogleMap;
-
+}

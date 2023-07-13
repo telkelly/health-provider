@@ -70,7 +70,7 @@ const App = () => {
           </div>
         )}
       </div>
-      <GoogleMap/>
+      <GoogleMap />
     </>
   );
 };
