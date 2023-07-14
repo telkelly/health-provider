@@ -2,7 +2,6 @@ import "../src/App.css";
 import React, { useState } from "react";
 import axios from "axios";
 import ResponsiveAppBar from "./components/Navbar";
-import GoogleMap from "./components/GoogleMaps";
 
 const App = () => {
   const [symptoms, setSymptoms] = useState("");
@@ -70,7 +69,6 @@ const App = () => {
           </div>
         )}
       </div>
-      <GoogleMap />
     </>
   );
 };
