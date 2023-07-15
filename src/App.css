@@ -1,9 +1,14 @@
-
-nav{
+navbar{
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+
+.reg-side{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
 .registr-form{
