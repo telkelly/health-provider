@@ -4,13 +4,13 @@ const jwt = require("jsonwebtoken");
 
 const _register = async (req, res) => {
   console.log(req.body);
-  const { email, password } = req.body;
+  const { firstname, lastname, email, password } = req.body;
 
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password + "", salt);
 
   let lower_email = email.toLowerCase();
-  register(lower_email, hash)
+  register(firstname, lastname, lower_email, hash)
     .then((row) => {
       res.json(row);
     })
@@ -38,7 +38,7 @@ const _login = async (req, res) => {
         { userid, email },
         process.env.TOKEN_SECRET,
         {
-          expiresIn: "60s",
+          expiresIn: "300s",
         }
       );
 
@@ -47,7 +47,7 @@ const _login = async (req, res) => {
         maxAge: 60 * 1000,
       });
 
-      res.json({ token: accessToken });
+      res.json({ auth: true, token: accessToken, result: row});
     })
     .catch((err) => {
       console.log(err);

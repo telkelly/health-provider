@@ -1,7 +1,9 @@
 const { db } = require("../config/dbsql");
 
-const register = (email, password) => {
-  return db("users").insert({ email, password }).returning("id");
+const register = (firstname, lastname, email, password) => {
+  return db("users")
+    .insert({ firstname, lastname, email, password })
+    .returning("id");
 };
 
 const login = (email) => {

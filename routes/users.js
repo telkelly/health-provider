@@ -8,6 +8,7 @@ const { verifyToken } = require("../middlequeries/VerifyToken.js");
 router.post("/register",  _register);
 router.post("/login", _login);
 router.get("/verify", verifyToken, (req, res) => {
+  res.send('Yo u are auth')
   res.sendStatus(200);
 });
 
