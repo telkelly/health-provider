@@ -21,6 +21,7 @@ const LogIn = () => {
     email: "",
     password: "",
   });
+  
   const [login, setLogin] = useState(false);
 
   const handle = (e) => {
@@ -39,6 +40,8 @@ const LogIn = () => {
       })
       .then((res) => {
         console.log(res.data);
+        console.log(res.data.token)
+        localStorage.setItem('token', res.data.token)
       });
   };
 
