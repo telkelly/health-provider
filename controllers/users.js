@@ -1,4 +1,4 @@
-const { register, login } = require("../modules/users.js");
+const { register, login, getUser } = require("../modules/users.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -38,7 +38,7 @@ const _login = async (req, res) => {
         { userid, email },
         process.env.TOKEN_SECRET,
         {
-          expiresIn: "300s",
+          expiresIn: "10000s",
         }
       );
 
@@ -55,8 +55,20 @@ const _login = async (req, res) => {
     });
 };
 
+const _getUser = (req,res) => {
+  getUser(req.params.id)
+  .then(data => {
+    res.json(data)
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(404).json({msg:'not found'})
+  })
+}
+
 module.exports = {
   _register,
   _login,
+  _getUser
 };
 
