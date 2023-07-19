@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import HistorySymptoms from "./HistorySymptoms";
 
 const UserProfile = (props) => {
   const [data, setData] = useState(null);
