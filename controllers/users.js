@@ -3,6 +3,7 @@ const {
   login,
   getUser,
   putHistoryofSymptoms,
+  getUserHistory,
 } = require("../modules/users.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -83,10 +84,22 @@ const _putHistoryofSymptoms = (req, res) => {
     });
 }
 
+const _getUserHistory = (req, res) => {
+  getUserHistory(req.params.id)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(404).json({ msg: "history not found" });
+    });
+}
+
 module.exports = {
   _register,
   _login,
   _getUser,
   _putHistoryofSymptoms,
+  _getUserHistory,
 };
 

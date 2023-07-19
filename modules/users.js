@@ -18,7 +18,11 @@ const getUser = (id) => {
 
 const putHistoryofSymptoms = (id, historyofsymptoms) => {
   const jsonHistory = JSON.stringify(historyofsymptoms);
-  return db("users").update({ historyofsymptoms:jsonHistory }).where({id});
+  return db("users").update({ historyofsymptoms:jsonHistory }).where("id", id);;
+};
+
+const getUserHistory = (id) => {
+  return db("users").select("id", "historyofsymptoms").where({ id });
 };
 
 
@@ -27,4 +31,5 @@ module.exports = {
   login,
   getUser,
   putHistoryofSymptoms,
+  getUserHistory,
 };
