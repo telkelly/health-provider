@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import TextField from '@mui/material/TextField';
+import Button from "@mui/material/Button";
+
+
 
 const SymptomChecker = (props) => {
   const [symptoms, setSymptoms] = useState("");
@@ -45,12 +49,13 @@ const SymptomChecker = (props) => {
       <h1>Symptom Checker</h1>
       <form onSubmit={handleSubmit}>
         <p>Enter your symptoms:</p>
-        <input
+        {/* <input
           type="text"
           value={symptoms}
           onChange={(e) => setSymptoms(e.target.value)}
-        />
-        <button type="submit">Submit</button>
+        /> */}
+        <TextField label="Tell me how are you feeling" variant="standard" />
+        <Button type="submit" variant="outlined">Search</Button>
       </form>
       {result && result.potentialCauses && (
         <div>
