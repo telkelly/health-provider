@@ -1,4 +1,9 @@
-const { register, login, getUser } = require("../modules/users.js");
+const {
+  register,
+  login,
+  getUser,
+  putHistoryofSymptoms,
+} = require("../modules/users.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -66,9 +71,22 @@ const _getUser = (req,res) => {
   })
 }
 
+const _putHistoryofSymptoms = (req, res) => {
+  const { id, historyofsymptoms } = req.body;
+  putHistoryofSymptoms(id, historyofsymptoms)
+    .then((result) => {
+      console.log(res.json(result));
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(404).json({ msg: "nothing to put" });
+    });
+}
+
 module.exports = {
   _register,
   _login,
-  _getUser
+  _getUser,
+  _putHistoryofSymptoms,
 };
 

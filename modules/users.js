@@ -16,8 +16,15 @@ const getUser = (id) => {
   .where({id})
 }
 
+const putHistoryofSymptoms = (id, historyofsymptoms) => {
+  const jsonHistory = JSON.stringify(historyofsymptoms);
+  return db("users").update({ historyofsymptoms:jsonHistory }).where({id});
+};
+
+
 module.exports = {
   register,
   login,
-  getUser
+  getUser,
+  putHistoryofSymptoms,
 };
