@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const SymptomChecker = () => {
+const SymptomChecker = (props) => {
   const [symptoms, setSymptoms] = useState("");
   const [result, setResult] = useState([]);
+  const userId = localStorage.getItem("userId");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,8 +26,15 @@ const SymptomChecker = () => {
     };
 
     try {
+      const token = localStorage.getItem("token");
       const response = await axios.request(options);
       setResult(response.data);
+      if (token && response) {
+        axios.post(`/user/${userId}/history`, {
+          id: userId,
+          historyofsymptoms: response.data.potentialCauses,
+        });
+      }
     } catch (error) {
       console.error(error);
     }

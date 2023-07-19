@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 
-const pages = ["About", "Symptoms checker"];
+const pages = ["About", "Symptoms checker", "User"];
 const settings = ["Profile", "Logout"];
 
 const Navbar = () => {
@@ -129,6 +129,15 @@ const Navbar = () => {
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {pages[1]}
+              </Button>
+            </Link>
+            <Link to={"/user"}>
+              <Button
+                key={pages[2]}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                {pages[2]}
               </Button>
             </Link>
           </Box>

@@ -23,7 +23,6 @@ const LogIn = () => {
     password: "",
   });
   const [auth, setAuth] = useState(false)
-  const userId = useRef(0)
 
   const handle = (e) => {
     const newData = { ...data };
@@ -40,7 +39,8 @@ const LogIn = () => {
         password: data.password,
       })
       .then((res) => {
-        userId.current = res.data.result[0].id;
+        const userId = res.data.result[0].id
+        localStorage.setItem('userId', userId);
         console.log(res.data.result[0].id);
         console.log(res.data.token)
         if (localStorage) {
@@ -52,7 +52,7 @@ const LogIn = () => {
 
   return (
     <>
-      {auth ? <UserProfile userId={userId.current} /> :
+      {auth ? <UserProfile /> :
         <ThemeProvider theme={defaultTheme}>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
