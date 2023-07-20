@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,38 +13,53 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-
-
-const pages = ["About", "Symptoms checker", "User"];
-const settings = ["Profile", "Logout"];
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import UserProfile from "./UserProfile";
 
 const Navbar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const token = localStorage.getItem("token");
+  //const [auth, setAuth] = useState(false);
+  const navigate = useNavigate()
+  //const navigate = useNavigate();
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  // useEffect(() => {
+  //   setAuth(token)
+  // }, [])
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleDeleteToken = () => {
+    localStorage.clear("token");
+    navigate("/about");
+   // navigate('/about')
   };
 
   return (
     <navbar>
-     <Link to={'/about'}><p className="about">About</p></Link>
-      <Link to={'/checker'}><p className="checker">Checker</p></Link>
-      <Link to={'/login'}><p className="sign-in">Sign in</p></Link>
-      <Link to={'/register'}><p className="sign-up">Sign up</p></Link>
+      <Link to={"/about"}>
+        <p className="about">About</p>
+      </Link>
+      <Link to={"/checker"}>
+        <p className="checker">Checker</p>
+      </Link>
+      {token ? (
+        <>
+          <Link to={'/user'}><p className="user">
+            Profile
+          </p></Link>
+          <p className="sign-out" onClick={handleDeleteToken}>
+            Log out
+          </p>
+        </>
+      ) : (
+        <>
+          <Link to={"/login"}>
+            <p className="sign-in">Sign in</p>
+          </Link>
+          <Link to={"/register"}>
+            <p className="sign-up">Sign up</p>
+          </Link>
+        </>
+      )}
     </navbar>
     // <AppBar position="static">
     //   <Container maxWidth="xl">
