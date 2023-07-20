@@ -28,21 +28,30 @@ const UserProfile = (props) => {
 
 
   return (
-    <>
-      <h2>User Profile</h2>
+    <div className="user-profile">
       {data ? (
         <>
-          <h3>{data.firstname}</h3>
-          <h3>{data.lastname}</h3>
-          <h3>{data.email}</h3>
-          {history && (
-            <h1>{history.historyofsymptoms}</h1>
+          <h3>
+            Hello, {data.firstname} {data.lastname}
+          </h3>
+          <h3>Your email is {data.email}</h3>
+          {history ? (
+            <>
+              <h2>Your last Symptoms:</h2>
+              <ul>
+                {history.historyofsymptoms.map((i) => (
+                  <li>{i}</li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <h1>No history found</h1>
           )}
         </>
       ) : (
-        <h1>Try AGAIN</h1>
+        <h1>Loading...</h1>
       )}
-    </>
+    </div>
   );
 };
 

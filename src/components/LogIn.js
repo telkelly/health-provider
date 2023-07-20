@@ -15,7 +15,13 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import UserProfile from "./UserProfile";
 
-const defaultTheme = createTheme();
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#81C1BD",
+    },
+  },
+});
 
 const LogIn = () => {
   const [data, setData] = useState({
@@ -52,8 +58,10 @@ const LogIn = () => {
 
   return (
     <>
-      {auth ? <UserProfile /> :
-        <ThemeProvider theme={defaultTheme}>
+      {auth ? (
+        <UserProfile />
+      ) : (
+        <ThemeProvider theme={theme}>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
@@ -98,10 +106,6 @@ const LogIn = () => {
                   id="password"
                   autoComplete="current-password"
                 />
-                <FormControlLabel
-                  control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
-                />
                 <Button
                   type="submit"
                   fullWidth
@@ -111,11 +115,6 @@ const LogIn = () => {
                   Sign In
                 </Button>
                 <Grid container>
-                  <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Forgot password?
-                    </Link>
-                  </Grid>
                   <Grid item>
                     <Link href="/register" variant="body2">
                       {"Don't have an account? Sign Up"}
@@ -126,9 +125,9 @@ const LogIn = () => {
             </Box>
           </Container>
         </ThemeProvider>
-      }
-      </>
-    )
+      )}
+    </>
+  );
 }
 
 export default LogIn;

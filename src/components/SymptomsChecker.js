@@ -1,18 +1,26 @@
 import React, { useState } from "react";
 import axios from "axios";
-import TextField from '@mui/material/TextField';
+import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#81C1BD",
+    },
+  },
+});
 
 const SymptomChecker = (props) => {
   const [symptoms, setSymptoms] = useState("");
   const [result, setResult] = useState([]);
   const userId = localStorage.getItem("userId");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
+    
+     e.preventDefault();
     const options = {
       method: "POST",
       url: "https://symptom-checker4.p.rapidapi.com/analyze",
@@ -48,24 +56,27 @@ const SymptomChecker = (props) => {
     <div className="symptom-div">
       <h1>Symptom Checker</h1>
       <form onSubmit={handleSubmit}>
-        <p>Enter your symptoms:</p>
-        {/* <input
-          type="text"
-          value={symptoms}
-          onChange={(e) => setSymptoms(e.target.value)}
-        /> */}
-        <TextField label="Tell me how are you feeling" variant="standard" />
-        <Button type="submit" variant="outlined">Search</Button>
+        <ThemeProvider theme={theme}>
+          <TextField label="Tell me how are you feeling" variant="standard" />
+          <Button type="submit" variant="outlined" color="primary" className="symt-btn">
+            Search
+          </Button>
+        </ThemeProvider>
       </form>
-      {result && result.potentialCauses && (
-        <div>
-          <h2>Analysis Result:</h2>
-          <ul>
-            {result.potentialCauses.map((cause, index) => (
-              <li key={index}>{cause}</li>
-            ))}
-          </ul>
-        </div>
+      {isLoading ? (
+        <h1>Loading...</h1>
+      ) : (
+        result &&
+        result.potentialCauses && (
+          <div>
+            <h2>Analysis Result:</h2>
+            <ul>
+              {result.potentialCauses.map((cause, index) => (
+                <li key={index}>{cause}</li>
+              ))}
+            </ul>
+          </div>
+        )
       )}
       {result && result.followupQuestions && (
         <div>
