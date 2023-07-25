@@ -133,7 +133,7 @@ li::before {
 
 @media (min-width: 992px) and (max-width: 1199px) {
   .container {
-    width: 700px;
+    width: 600px;
   }
   .symptom-div {
   width: 600px;
@@ -142,6 +142,10 @@ li::before {
 
 @media (min-width: 1200px) {
   .container {
+    width: 700px;
+  }
+
+  .about-div{
     width: 800px;
   }
   
